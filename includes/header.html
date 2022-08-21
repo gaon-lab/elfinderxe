@@ -1,0 +1,84 @@
+<!--// CSS 로드(순서대로 로드되어야 정상동작함.) -->
+<load target="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" media="screen" index="1" />
+<load target="css/elfinder.min.css" media="screen" index="2" />
+<!--<load target="css/theme.css" media="screen" index="3" /> -->
+<load target="themes/windows-10/css/theme.css" media="screen" index="3" />
+<!--// Script 로드 -->
+<load target="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+<load target="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" />
+<load target="js/elfinder.min.js" />
+
+<!--// 언어팩 로드 -->
+<load target="js/i18n/elfinder.ko.js" cond="$lang_type=='ko'" />
+<load target="js/i18n/elfinder.en.js" cond="$lang_type=='en'" />
+<load target="js/i18n/elfinder.jp.js" cond="$lang_type=='jp'" />
+<load target="js/i18n/elfinder.fr.js" cond="$lang_type=='fr'" />
+<load target="js/i18n/elfinder.de.js" cond="$lang_type=='de'" />
+<load target="js/i18n/elfinder.ru.js" cond="$lang_type=='ru'" />
+<load target="js/i18n/elfinder.es.js" cond="$lang_type=='es'" />
+<load target="js/i18n/elfinder.zh_CN.js" cond="$lang_type=='zh_CN'" />
+
+<!--// Initializer-->
+<load target="js/elfinder_init.js" />
+
+<!--// Client 환경설정 변수 -->
+<script type="text/javascript">
+// <![CDATA[
+	// Elfinder Client Config Variables
+	elfinderxe_config_vars = {
+		url			: "{getNotEncodedUrl('', 'mid', $module_info->mid, 'act', 'procElfinderxeFileManager')}",
+		lang		: "{$lang_pack}",
+		defaultView	: "{$module_info->default_view}",
+		width		: {$module_info->elfinderxe_width_auto=='N'?$module_info->elfinderxe_width:"'auto'"},
+		height		: {$module_info->elfinderxe_height},
+		dateFormat	: "{$module_info->date_format}",
+		ui			: {json_encode($module_info->elfinderxe_ui)},
+		commands	: {json_encode($allowed_cmd)},
+		uiOptions	: {
+
+/*
+
+            'custom','open', 'reload', 'home', 'up', 'back', 'forward', 'getfile', 'quicklook', 
+            'download', 'rm', 'duplicate', 'rename', 'mkdir', 'mkfile', 'upload', 'copy', 
+            'cut', 'paste', 'edit', 'extract', 'archive', 'search', 'info', 'view', 'help', 'resize', 'sort', 'netmount'
+*/
+
+
+			toolbar : [
+                        ['open','netmount'],
+                        ['back', 'forward'],
+                        ['reload'],
+                        ['home', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['info'],
+                        ['quicklook'],
+                        ['copy', 'cut', 'paste'],
+                        ['rm'],
+                        ['duplicate', 'rename', 'edit'],
+                        ['extract', 'archive'],
+                        ['search'],
+                        ['view'],
+                        ['help']
+			],
+
+			cwd : {
+				oldSchool : true
+			}
+		},
+                contextmenu : {
+
+                    /* 상위 메뉴 */
+                    //navbar : ['open', '|', 'copy', 'cut', 'paste', 'duplicate', '|', 'rm', '|', 'info'],
+
+                    /* 일반 우클릭 */
+                    cwd    : ['reload', 'back', '|', 'upload', 'mkdir', 'mkfile', '|', 'copy', 'paste', '|', 'sort', '|' , 'forward', '|', 'info'],
+
+                      /* 파일 우클릭 */   
+                    files  : [
+                        'open', '|', 'copy', 'cut', 'paste',  '|', 'duplicate',   '|',
+                        'rm', '|', 'edit', 'rename', '|', 'archive', 'extract', '|', 'info'
+                    ]
+                }
+	}
+// ]]>
+</script>
